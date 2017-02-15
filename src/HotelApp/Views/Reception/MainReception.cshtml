@@ -1,0 +1,86 @@
+﻿@model HotelApp.Models.AdminViewModel.AdminViewModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Список всех апартаментов
+    </div>
+    <div class="panel-body">
+        <div class="container">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.ApartmentNumberSort)">Apartment №</a>
+                        </th>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.FreeSort)">Free</a>
+                        </th>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.NumberOfRoomsSort)">Number of rooms</a>
+                        </th>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.ApartmentTypeSort)">Apartment type</a>
+                        </th>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.MaxTetansSort)">Max. Tenants</a>
+                        </th>
+                        <th>
+                            <a asp-action="MainReception"
+                               asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                               asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                               asp-route-sortOrder="@(Model.SortViewModel.PricePerHourSort)">Price per hour</a>
+                        </th>
+                        <th class="text-center">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Apartments)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Name</td>
+                            <td class="text-center">@item.Free</td>
+                            <td class="text-center">@item.NumberOfRooms</td>
+                            <td class="text-center">@item.ApartmentType</td>
+                            <td class="text-center">@item.MaxTenants</td>
+                            <td class="text-center">@item.PricePerHour</td>
+                            <td>
+                                @if (item.Free == false)
+                                {
+                                    <a class="btn btn-danger" asp-action="Eviction" asp-controller="Reception" asp-route-apartmentId="@(item.Id)">Eviction</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-footer">
+        <form method="get" class="form-inline">
+            <div class="form-inline form-group">
+                <label class="control-label">Найти: </label>
+                @Html.TextBox("searchedValue", Model.FilterViewModel.SearchedValue, htmlAttributes: new { @class = "form-control" })
+
+                <label class="control-label">  в : </label>
+                @Html.DropDownList("SearchInColumn", Model.FilterViewModel.NamesOfColumns,
+                htmlAttributes: new { @class = "form-control" })
+
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model HotelApp.Models.DataModels.Apartment
+@using HotelApp.Models.DataModels;
+@{
+    ViewBag.Title = "Добавить новые аппартаменты";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container col-lg-12">
+        <h2>Remove this item?</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Apartment №</th>
+                    <th>Apartment type</th>
+                    <th>Number of rooms</th>
+                    <th>Maximum tenants</th>
+                    <th>Price per hour</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayFor(x => x.Name)</th>
+                    <th>@Html.DisplayFor(x => x.ApartmentType)</th>
+                    <th>@Html.DisplayFor(x => x.NumberOfRooms)</th>
+                    <th>@Html.DisplayFor(x => x.MaxTenants)</th>
+                    <th>@Html.DisplayFor(x => x.PricePerHour)</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="container-fluid text-center">
+        <div class="form-group">
+            <form asp-controller="SysAdmin" class="col-sm-1" method="post" asp-action="Delete">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+            <form asp-controller="SysAdmin" class="col-sm-1" method="get" asp-action="Index">
+                <button type="submit" class="btn btn-primary">Cancel</button>
+            </form>
+        </div>
+    </footer>
+</body>
+</html>

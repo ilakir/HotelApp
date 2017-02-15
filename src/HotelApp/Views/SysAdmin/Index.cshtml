@@ -1,0 +1,74 @@
+﻿@model HotelApp.Models.SysAdminVIewModel.SysAdminViewModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                       asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                       asp-route-sortOrder ="@(Model.SortViewModel.ApartmentNumberSort)">Apartment №</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                       asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                       asp-route-sortOrder="@(Model.SortViewModel.NumberOfRoomsSort)">Number of rooms</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                       asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                       asp-route-sortOrder="@(Model.SortViewModel.ApartmentTypeSort)">Apartment type</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                       asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                       asp-route-sortOrder="@(Model.SortViewModel.MaxTetansSort)">Max. Tenants</a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-searchedValue="@(Model.FilterViewModel.SearchedValue)"
+                       asp-route-searchInColumn="@(Model.FilterViewModel.SearchInColumn)"
+                       asp-route-sortOrder="@(Model.SortViewModel.PricePerHourSort)">Price per hour</a>
+                </th>
+                <th class="text-center">Option</th>
+            </tr>
+            @foreach (var item in Model.Apartments)
+            {
+                <tr>
+                    <td class="text-center">@item.Name</td>
+                    <td class="text-center">@item.NumberOfRooms</td>
+                    <td class="text-center">@item.ApartmentType</td>
+                    <td class="text-center">@item.MaxTenants</td>
+                    <td class="text-center">@item.PricePerHour</td>
+                    <td>
+                        <a class="btn btn-default" asp-action="Edit" asp-controller="SysAdmin" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-default" asp-action="Delete" asp-controller="SysAdmin" asp-route-id="@item.Id">Remove</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel panel-footer">
+        <form method="get">
+            <div class="form-inline form-group">
+                <label class="control-label">Найти: </label>
+                @Html.TextBox("searchedValue", Model.FilterViewModel.SearchedValue, htmlAttributes: new { @class = "form-control" })
+
+                <label class="control-label">  в : </label>
+                @Html.DropDownList("SearchInColumn", Model.FilterViewModel.NamesOfColumns,
+                htmlAttributes: new { @class = "form-control" })
+
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </form>
+        <form method="get" asp-controller="SysAdmin" asp-action="Create">
+            <input class="btn btn-default" type="submit" value="Сreate new apartment" />
+        </form>
+    </div>
+</div>

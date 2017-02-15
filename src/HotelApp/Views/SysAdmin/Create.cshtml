@@ -1,0 +1,52 @@
+﻿@model HotelApp.Models.DataModels.Apartment
+@using HotelApp.Models.DataModels;
+@{
+    ViewBag.Title = "Добавить новые аппартаменты";
+}
+<div class="col-sm-8">
+    <form asp-controller="SysAdmin" asp-action="Create" method="post" class="form-horizontal">
+        <h4>Create a new appantment.</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApartmentType" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select class="form-control" asp-for="ApartmentType" asp-items="Html.GetEnumSelectList<TypesOfApartments>().ToList()"></select>
+                <span asp-validation-for="ApartmentType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfRooms" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NumberOfRooms" type="datetime" class="form-control" />
+                <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MaxTenants" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MaxTenants" class="form-control" />
+                <span asp-validation-for="MaxTenants" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PricePerHour" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PricePerHour" class="form-control" />
+                <span asp-validation-for="PricePerHour" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
